@@ -1,0 +1,33 @@
+{% include 'mhead.html'%}
+<div class="row m-auto">
+  <div class="col-md-3"></div>
+      <div class="col-md-9">
+        <div class="text-center h4 mt-4 color= text-danger">View Tests</div>
+         <div class="container">
+        <div class="row">
+        {% for test in tests:%}
+        {% set vendor=get_vendor_id(test['vendor_id'])%}
+          <div class="col-md-4">
+              <div class="card mt-5 p-3">
+                <div class="mt-1">
+                  <div class="text-muted" style="font-style:80%">Vendor Name</div>
+                  <div class="h6">{{vendor['name']}}</div>
+                </div>
+                <div class="mt-1">
+                  <div class="text-muted" style="font-style:80%"> Test Title</div>
+                  <div class="h6">{{test['test_title']}}</div>
+                </div>
+                <div class="mt-1">
+                  <div class="text-muted" style="font-style:80%"> Test Description</div>
+                  <div class="h6">{{test['test_description']}}</div>
+                </div>
+                <div class="mt-2">
+                  <a href="viewTestQuestions?test_id={{test['_id']}}" class="btn btn-primary w-100">View Test Questions</a>
+                </div>
+              </div>
+          </div>
+          {% endfor %}
+        </div>
+         </div>
+      </div>
+</div>

@@ -1,0 +1,49 @@
+{% include 'mhead.html'%}
+<div class="row m-auto">
+  <div class="col-md-3"></div>
+      <div class="col-md-9">
+        <div class="text-center h4 mt-4 color= text-danger">View Clients</div>
+        <div class="row">
+        {% for client in clients:%}
+          <div class="col-md-4">
+             <div class="card mt-5 p-3">
+                <div class="mt-1">
+                  <img src="/static/Logo/{{client['logo']}}" style="max-width:100%;height:100px;">
+                </div>
+               <div class="mt-1">
+                 <div class="text-muted" style="font-style:80%">Client Name</div>
+                 <div class="h6">{{client['name']}}</div>
+               </div>
+              <div class="mt-1">
+                 <div class="text-muted" style="font-style:80%">Phone Number</div>
+                 <div class="h6">{{client['phone']}}</div>
+              </div>
+              <div class="mt-1">
+                 <div class="text-muted" style="font-style:80%">Email</div>
+                 <div class="h6">{{client['email']}}</div>
+              </div>
+              <div class="mt-1">
+                 <div class="text-muted" style="font-style:80%">Employee Count</div>
+                 <div class="h6">{{client['employee_count']}}</div>
+              </div>
+             <div class="mt-1">
+                 <div class="text-muted" style="font-style:80%">Description</div>
+                 <div class="h6">{{client['description']}}</div>
+              </div>
+               <div class="row">
+                 <div class="col-md-6 mt-1">
+                   <div class="text-muted" style="font-style:80%">Status</div>
+                   <div class="h6">{{client['status']}}</div>
+              </div>
+                <div class="col-md-6 mt-3">
+                  {% if client['status']=='UnAuthorized': %}
+                       <a href="authorizedClient?client_id={{client['_id']}}"  class="btn btn-primary">Authorized</a>
+                  {% endif %}
+                </div>
+             </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>

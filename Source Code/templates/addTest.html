@@ -1,0 +1,31 @@
+{% include 'mhead.html' %}
+<div class="container">
+<div class="row m-auto">
+  <div class="col-md-3"></div>
+      <div class="col-md-9">
+        <div class="text-center h5 mt-2">Add Test</div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <div class="card mt-3 p-3">
+            <form action="addTest1" method="post">
+              <div class="mt-2">
+                <label for="test_title" class="form-label">Test Title</label>
+                <input type="text" name="test_title" id="test_title" required placeholder="Enter Title" class="form-control">
+              </div>
+              <div class="mt-2">
+                <label for="cut_of_percentage" class="form-label">Cut Of Percentage</label>
+                <input type="number" name="cut_of_percentage" id="cut_of_percentage" required class="form-control" placeholder="Enter Percentage">
+              </div>
+               <div class="mt-2">
+                 <label for="test_description" class="form-label">Description </label>
+                 <textarea name="test_description" id="test_description" required placeholder="Enter description" class="form-control"></textarea>
+              </div>
+              <div class="mt-3">
+                <input type="submit" value="Next" class="btn btn-primary w-100">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

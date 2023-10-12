@@ -1,0 +1,22 @@
+{% include 'mhead.html'%}
+<div class="row mt-5">
+    <div class="col-md-5"></div>
+    <div class="col-md-4 p-2 mt-5">
+        <div class="card p-4 mt-5">
+            <form action="aLogin1" method="post">
+                <div class="h4 text-center h6">Admin Login</div>
+                <div class="form-group">
+                    <label for="Username">User Name</label>
+                    <input type="text" class="form-control p-2 mt-1" id="Username" placeholder="UserName" name="Username" required>
+                </div>
+                <div class="form-group mt-1">
+                    <label for="Password" style="">Password</label>
+                    <input type="Password" class="form-control mt-1 p-2" id="Password" placeholder="Enter Password" name="Password" required>
+                </div>
+                <div class="mt-2">
+                    <input type="submit" value="Login" class="btn btn-primary w-100" >
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

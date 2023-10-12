@@ -1,0 +1,46 @@
+{% include 'mhead.html'%}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-8 mt-2">
+        <div class="h4 text-center mt-3 h4">Job Requirement</div>
+        <div class="row">
+            <div class="card p-3 mt-3">
+                <form action="jobRequirement1" method="post">
+                    <div class="row">
+                        <div class="mt-1">
+                            <div class="form-group">
+                                <label for="job_title">Job Title</label>
+                                <input type="text"  class="form-control" name="job_title" id="job_title" placeholder="Enter Title" required>
+                            </div>
+                            <div class="form-group mt-1">
+                                <label for="job_description">Job Description</label>
+                                <textarea rows="7" name="job_description" id="job_description"  class="form-control mt-1" placeholder="Enter Description" required></textarea>
+                            </div>
+                            <div class="form-group mt-1">
+                                <label for="experience_needed">Experience</label>
+                                <input type="text" name="experience_needed" id="experience_needed"  class="form-control mt-1" placeholder="Enter Experience" required>
+                            </div>
+                            <div class="form-group mt-1">
+                                <label for="number_of_positions">Number of Positions</label>
+                                <input type="number" name="number_of_positions" id="number_of_positions"  class="form-control " placeholder="Enter Count" required>
+                            </div>
+                            <div class="form-group mt-1">
+                                <label>Choose Vendor</label>
+                                <select name="vendor_id" id="vendor_id" class="form-control" multiple required>
+                                    <option value="">Choose Vendor</option>
+                                    {% for vendor in vendors:%}
+                                        <option value="{{vendor['_id']}}">{{vendor['name']}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="skills">Skills</label>
+                                <input type="text"  class="form-control" name="skills" id="skills" placeholder="Enter Skills" required>
+                            </div>
+                        <input type="submit" value="Add" class="btn btn-success w-100 mt-4">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+{% include 'mhead.html'%}
+<div class="row m-auto">
+  <div class="col-md-3"></div>
+      <div class="col-md-9">
+        <div class="text-center h4 mt-4 color= text-danger">View Job Applications</div>
+         <div class="container">
+        <div class="row">
+        {% for job_application in job_applications:%}
+        {% set jobpost, job_requirement=get_jobDetails(job_application['jobpost_id'])%}
+        {% set candidate=get_customer_id(job_application['Candidate_id'])%}
+            <div class="col-md-4 mt-3">
+             <div class="card mt-5 p-3">
+                  <div class="mt-1">
+                      <div class="text-muted" style="font-style:70%">Candidate Name</div>
+                      <div class="h6">{{candidate['name']}}</div>
+                  </div>
+                  <div class="mt-1">
+                      <div class="text-muted" style="font-style:70%">Phone Number</div>
+                      <div class="h6">{{candidate['phone']}}</div>
+                  </div>
+                  <div class="mt-1">
+                      <div class="text-muted" style="font-style:70%">Email</div>
+                      <div class="h6">{{candidate['email']}}</div>
+                  </div>
+                 <div class="mt-1">
+                     <div class="text-muted" style="font-style:70%">Job Title</div>
+                     <div class="h6">{{job_requirement['job_title']}}</div>
+                 </div>
+                 <div class="mt-1">
+                     <div class="text-muted" style="font-style:70%">Skills</div>
+                     <div class="h6">{{job_requirement['skills']}}</div>
+                 </div>
+                 <div class=" mt-1">
+                     <div class="text-muted" style="font-style:70%">Date</div>
+                     <div class="h6">{{job_application['date']}}</div>
+                 </div>
+                 <div class="mt-1">
+                     <div class="text-muted" style="font-style:70%">Status</div>
+                     <div class="h6">{{job_application['status']}}</div>
+                 </div>
+                  {% if job_application['status'] == 'Applied Successfully' and session['role'] == 'Vendor':%}
+                 <div class="mt-2">
+                     <a href="assignTest?job_application_id={{job_application['_id']}}&jobpost_id={{jobpost['_id']}}" class="btn btn-primary w-100">Assign Test</a>
+                 </div>
+                 {% endif %}
+                 {% if job_application['status'] == 'Test Assigned' and session['role'] == 'Candidate':%}
+                 <div class="mt-2">
+                     <a href="writeTest?job_application_id={{job_application['_id']}}&test_id={{job_application['test_id']}}" class="btn btn-primary w-100">Write Test</a>
+                 </div>
+                 {% endif %}
+                 {% if job_application['status'] == 'Test Cleared' and session['role'] == 'Client':%}
+                 <div class="mt-2">
+                     <a href="interviewSchedule?job_application_id={{job_application['_id']}}&vendor_id={{job_application['vendor_id']}}" class="btn btn-success w-100">Schedule Interview</a>
+                 </div>
+                 {% endif %}
+                 {% if job_application['status'] == 'Interview Scheduled' and session['role'] == 'Candidate':%}
+                  <div class="row">
+                     <div class="col-md-6 mt-2">
+                         <a href="acceptInterview?job_application_id={{job_application['_id']}}" class="btn btn-success w-100">Accept</a>
+                     </div>
+                     <div class="col-md-6 mt-2">
+                         <a href="cancelledInterview?job_application_id={{job_application['_id']}}" class="btn btn-danger w-100">Cancel</a>
+                     </div>
+                 </div>
+                 {% endif %}
+                   {% if job_application['status'] == 'Interview Schedule Accepted' and session['role'] == 'Client':%}
+                 <div class="row">
+                     <div class="col-md-6 mt-2">
+                         <a href="clientAccept?job_application_id={{job_application['_id']}}" class="btn btn-success w-100" style="font-size:12.5px">Make As Select</a>
+                     </div>
+                     <div class="col-md-6 mt-2">
+                         <a href="clientReject?job_application_id={{job_application['_id']}}" class="btn btn-success w-100" style="font-size:12.5px">Make As Reject</a>
+                     </div>
+                 </div>
+                 {% endif %}
+                  {% if job_application['status'] == 'Test Cleared' or job_application['status'] == 'Failed To Clear The Test': %}
+                      <a href="viewResult?job_application_id={{job_application['_id']}}&test_id={{job_application['test_id']}}" class="btn btn-primary w-100 mt-3">View Test Result</a>
+                {% endif %}
+                  {% if job_application['status'] == 'Interview Scheduled' or job_application['status'] == 'Interview Schedule Accepted':%}
+                        <a href="viewInterviewSchedule?job_application_id={{job_application['_id']}}" class="btn btn-primary w-100 mt-3">View Interview Schedule</a>
+                 {% endif %}
+             </div>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+   </div>
+</div>
+

@@ -1,0 +1,72 @@
+{% include 'mhead.html'%}
+{% if session['role'] == 'Vendor':%}
+    {% include 'vHome.html'%}
+{% endif %}
+{% if session['role'] == 'Candidate':%}
+    {% include 'cHome.html'%}
+{% endif %}
+
+<div class="row m-auto">
+  <div class="col-md-3"></div>
+      <div class="col-md-9">
+        <div class="text-center h4 mt-4 color= text-danger">View Posted Jobs</div>
+         <div class="container">
+        <div class="row">
+        {% for jobpost in jobposts:%}
+        {% set vendor=get_vendor_id(jobpost['vendor_id'])%}
+        {% set requirement=get_requirement_id(jobpost['requirement_id'])%}
+             <div class="card mt-5 p-3">
+                 <div class="row">
+                     <div class="col-md-9">
+                         <div class="mt-1">
+                              <div class="text-muted" style="font-style:70%">Job Title</div>
+                              <div class="h6">{{requirement['job_title']}}</div>
+                          </div>
+                     </div>
+                     <div class="col-md-3">
+                         {% if session['role'] == 'Candidate':%}
+                            {% if jobpost['status'] == 'Requirement Posted':%}
+                                 <div class=" mt-1">
+                                     <a href="jobApplication?jobpost_id={{jobpost['_id']}}" class="btn btn-primary">Apply</a>
+                                 </div>
+                              {% endif %}
+                         {% endif %}
+                         {% if session['role'] == 'Vendor':%}
+                             <div class="mt-1">
+                                 <a href="viewJobApplications?jobpost_id={{jobpost['_id']}}" class="btn btn-primary">View Job Applications</a>
+                             </div>
+                         {% endif %}
+                     </div>
+                 </div>
+
+
+                 <div class="row mt-3">
+                     <div class="col-md-3">
+                         <div class="text-muted" style="font-style:70%">Vendor Name</div>
+                         <div class="h6">{{vendor['name']}}</div>
+                     </div>
+                     <div class="col-md-3 mt-1">
+                          <div class="text-muted" style="font-style:70%">Experience</div>
+                          <div class="h6">{{requirement['experience_needed']}}</div>
+                      </div>
+                     <div class="col-md-3 mt-1">
+                          <div class="text-muted" style="font-style:70%">Number Of Positions</div>
+                          <div class="h6">{{requirement['number_of_positions']}}</div>
+                      </div>
+                      <div class="col-md-3 mt-1">
+                         <div class="text-muted" style="font-style:70%">Date</div>
+                         <div class="h6">{{jobpost['date']}}</div>
+                     </div>
+                     <div class="col-md-12 mt-1">
+                          <div class="text-muted" style="font-style:70%">Job Description</div>
+                          <div class="h6">{{requirement['job_description']}}</div>
+                      </div>
+
+                 </div>
+             </div>
+        {% endfor %}
+      </div>
+    </div>
+   </div>
+</div>
+

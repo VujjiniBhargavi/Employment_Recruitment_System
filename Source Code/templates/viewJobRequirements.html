@@ -1,0 +1,81 @@
+{% include 'mhead.html'%}
+<div class="row m-auto">
+  <div class="col-md-3"></div>
+      <div class="col-md-9">
+        <div class="text-center h4 mt-4 color= text-danger">View Job Requirements</div>
+         <div class="container">
+        <div class="row">
+        {% for requirement in requirements:%}
+        {% set client=get_client_id(requirement['client_id'])%}
+             <div class="card mt-5 p-3">
+                 <div class="row">
+                     <div class="col-md-2 mt-1">
+                         <img src="/static/Logo/{{client['logo']}}" style="max-width:100%;height:100px;">
+                     </div>
+                     <div class="col-md-10 mt-4">
+                        <div class="text-muted" style="font-style:80%">Client Name</div>
+                        <div class="h6">{{client['name']}}</div>
+                     </div>
+                 </div>
+                  <div class="mt-1">
+                      <div class="text-muted" style="font-style:80%">Job Title</div>
+                      <div class="h6">{{requirement['job_title']}}</div>
+                  </div>
+                  <div class="mt-1">
+                      <div class="text-muted" style="font-style:80%">Job Description</div>
+                      <div class="h6">{{requirement['job_description']}}</div>
+                  </div>
+                 <div class="mt-1">
+                      <div class="text-muted" style="font-style:80%">Experience</div>
+                      <div class="h6">{{requirement['experience_needed']}}</div>
+                  </div>
+                 <div class="mt-1">
+                      <div class="text-muted" style="font-style:80%">Number Of Positions</div>
+                      <div class="h6">{{requirement['number_of_positions']}}</div>
+                  </div>
+                 <div class="row">
+
+                       {% if session['role'] == 'Client': %}
+                         {% for vendor_id in requirement['vendor_ids']:%}
+                         <div class="col-md-3">
+                             <div class="card mt-3 p-2">
+                                 {% set vendor=get_vendor_id(vendor_id)%}
+                                 <div class="mt-1">
+                                   <div class="text-muted" style="font-style:80%">Vendor Name</div>
+                                   <div class="h6">{{vendor['name']}}</div>
+                                 </div>
+                                  <div class="mt-1">
+                                   <div class="text-muted" style="font-style:80%">Phone Number</div>
+                                   <div class="h6">{{vendor['phone']}}</div>
+                                 </div>
+                                  <div class="col-md-6 mt-2">
+                                   <div class="text-muted" style="font-style:80%">Address</div>
+                                   <div class="h6">{{vendor['address']}}</div>
+                                 </div>
+                                 <div class="col-md-12 mt-2">
+                                     <a href="viewJobApplications?requirement_id={{requirement['_id']}}&vendor_id={{vendor['_id']}}" class="btn btn-primary w-100">View Job Applications</a>
+                                 </div>
+                             </div>
+                         </div>
+                         {% endfor %}
+                       {% endif %}
+
+                 </div>
+                 <div class="row">
+                    <div class="col-md-6 mt-1">
+                         <div class="text-muted" style="font-style:80%">Status</div>
+                         <div class="h6">{{requirement['status']}}</div>
+                     </div>
+                     <div class="col-md-6 mt-2">
+                     {% if session['role'] == 'Vendor': %}
+                        <a href="publishRequirement1?requirement_id={{requirement['_id']}}" class="btn btn-primary w-50">Publish</a>
+                     {% endif %}
+                     </div>
+                 </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+   </div>
+</div>
+

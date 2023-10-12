@@ -1,0 +1,33 @@
+{% include 'mhead.html'%}
+<div class="row m-auto">
+  <div class="col-md-3"></div>
+      <div class="col-md-9">
+        <div class="text-center h4 mt-4 color= text-danger">View Interview Schedule</div>
+         <div class="container">
+           <div class="row">
+             {% for interview in interviews:%}
+                <div class="col-md-4">
+                  <div class="card mt-3 p-3">
+                     <div class="mt-1">
+                          <div class="text-muted" style="font-style:80%">Interview Date</div>
+                          <div class="h6">{{interview['interview_date']}}</div>
+                      </div>
+                      <div class="mt-1">
+                          <div class="text-muted" style="font-style:80%">Interview Time</div>
+                          <div class="h6">{{interview['interview_time']}}</div>
+                      </div>
+                      <div class="mt-1">
+                          <div class="text-muted" style="font-style:80%">Description</div>
+                          <div class="h6">{{interview['description']}}</div>
+                      </div>
+                      <div class="mt-1">
+                          <div class="text-muted" style="font-style:80%">Status</div>
+                          <div class="h6">{{interview['status']}}</div>
+                     </div>
+                  </div>
+                </div>
+            {% endfor %}
+           </div>
+         </div>
+      </div>
+</div>
